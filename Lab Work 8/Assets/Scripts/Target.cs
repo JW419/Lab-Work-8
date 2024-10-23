@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Numerics;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ public class Target : MonoBehaviour
         Speed = speed;
         Size = size;
         PointValue = pointValue;
+        UnityEngine.Debug.Log("Setting target size to: " + size); // Debug log
 
         transform.localScale = new UnityEngine.Vector3(size, size, 1); // Adjust visual size
     }

@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetBuilder : MonoBehaviour
+public class TargetBuilder
 {
     private string shape;
     private float speed;
     private float size;
     private int pointValue;
+    public GameObject targetPrefab; // Add reference to your target prefab
 
     public TargetBuilder SetShape(string shape)
     {
@@ -33,11 +34,14 @@ public class TargetBuilder : MonoBehaviour
         return this;
     }
 
-    // No need for a constructor here
-    public Target Build()
+    public GameObject Build()
     {
-        // You just return null or a new instance of Target, since the actual
-        // target will be instantiated in the GameManager.
-        return new Target(); // You can keep this if you want an empty Target instance for any reason.
+        GameObject targetObject = Instantiate(targetPrefab); // Instantiate target prefab
+        Target targetComponent = targetObject.GetComponent<Target>();
+
+        // Initialize target component with the set values
+        targetComponent.Initialize(shape, speed, size, pointValue);
+
+        return targetObject; // Return the instantiated GameObject
     }
 }
